@@ -7,35 +7,41 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 //Componets:
+import Home from './components/Home.js'
 import SiteNav from './components/SiteNav.js'
 import SearchPage from './components/SearchPage'
-import SideBar from './components/SideBar'
 import FavoritesPage from './components/FavoritesPage'
+import ShowCase from './components/ShowCase'
 
 function App() {
   const [shows, setShows] = useState([])
   const [filteredList, setFilteredList] = useState([])
-  const [getError, setGetError] = useState({ errro: false, message: '' })
+  const [hasError, setHasError] = useState('')
   const [genres, setGenres] = useState([])
   const [favorites, setFavorites] = useState([])
+  const [clickedShowId, setClickedShowId] = useState('')
+
+  // const location = useLocation()
 
   useEffect(() => {
     const getData = async () => {
       try {
         const { data } = await axios.get('https://api.tvmaze.com/shows')
         setShows(data)
-        JSON.parse(window.localStorage.getItem('favorite-shows')) &&
-          setFavorites(
-            JSON.parse(window.localStorage.getItem('favorite-shows'))
-          )
+        setFilteredList(data)
       } catch (err) {
-        setGetError({ error: true, message: err.message })
+        setHasError(err.message)
       }
     }
     getData()
   }, [])
 
   useEffect(() => {
+    let localFavoritesArr = JSON.parse(
+      window.localStorage.getItem('favorite-shows')
+    )
+    setFavorites(localFavoritesArr)
+
     let genresList = []
     const genresFilterdList = []
 
@@ -56,6 +62,7 @@ function App() {
             <SiteNav />
           </Col>
           <Routes>
+            <Route path='/' element={<Home />} />
             <Route
               path='/search'
               element={
@@ -66,6 +73,9 @@ function App() {
                   filteredList={filteredList}
                   setFavorites={setFavorites}
                   favorites={favorites}
+                  setClickedShowId={setClickedShowId}
+                  clickedShowId={clickedShowId}
+                  hasError={hasError}
                 />
               }
             />
@@ -76,12 +86,15 @@ function App() {
                   shows={shows}
                   setFilteredList={setFilteredList}
                   filteredList={filteredList}
+                  setFavorites={setFavorites}
                   favorites={favorites}
+                  setClickedShowId={setClickedShowId}
+                  clickedShowId={clickedShowId}
                 />
               }
             />
+            <Route path='/:showID' element={<ShowCase />} />
           </Routes>
-          <SideBar filteredList={filteredList} />
         </Row>
       </BrowserRouter>
     </div>

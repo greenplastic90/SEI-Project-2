@@ -1,62 +1,81 @@
-import React { useEffect } from 'react'
+import React from 'react'
 
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import { Link } from 'react-router-dom/'
 
-const ShowCard = ({ item, setFavorites }) => {
-
-  useEffect(() => {
-    
-  })
-
+const ShowCard = ({ show, setFavorites, favorites, setClickedShowId }) => {
   const handelFavorite = (e) => {
-    console.log('value ->', e.target.value)
-    if (e.target.value === 'yes') {
-      e.target.value = 'no'
-      e.target.innerHTML = 'x'
-      const favArray = JSON.parse(window.localStorage.getItem('favorite-shows'))
-      favArray.indexOf(e.target.id) !== -1 &&
-        favArray.splice(favArray.indexOf(e.target.id), 1)
-      window.localStorage.setItem('favorite-shows', JSON.stringify(favArray))
-      setFavorites(favArray)
-      console.log('OnClick', e.target.value)
-    } else if (e.target.value === 'no') {
-      e.target.value = 'yes'
-      e.target.innerHTML = '0'
-      let favArray = []
-      if (window.localStorage.getItem('favorite-shows')) {
-        favArray = JSON.parse(window.localStorage.getItem('favorite-shows'))
-      }
-      favArray.push(e.target.id)
-      window.localStorage.setItem('favorite-shows', JSON.stringify(favArray))
-      setFavorites(favArray)
-      console.log('OnClick', e.target.value)
+    // value returns a string
+    if (e.target.value === 'false') {
+      e.target.value = 'true'
+      e.target.innerHTML = 'fav'
+
+      const localStorageArr = window.localStorage.getItem('favorite-shows')
+        ? JSON.parse(window.localStorage.getItem('favorite-shows'))
+        : []
+
+      localStorageArr.push(e.target.id)
+      setFavorites(localStorageArr)
+      window.localStorage.setItem(
+        'favorite-shows',
+        JSON.stringify(localStorageArr)
+      )
+    } else if (e.target.value === 'true') {
+      e.target.value = 'false'
+      e.target.innerHTML = 'not fav'
+      // console.log('id->', typeof e.target.id)
+      const updatedFavsArr = favorites.filter((id) => id !== e.target.id)
+      setFavorites(updatedFavsArr)
+      window.localStorage.setItem(
+        'favorite-shows',
+        JSON.stringify(updatedFavsArr)
+      )
     }
   }
-
-  // setFavorites
+  const getShowId = (e) => {
+    console.log('e ->', e.target.id)
+    setClickedShowId(e.target.id)
+  }
 
   return (
-    <Card key={item.id} className='px-5 py-3'>
-      <Card.Img variant='top' src={item.image.medium} />
-      <Card.Body>
-        <Card.Title>{item.name}</Card.Title>
-      </Card.Body>
-      <Row>
-        <Col>
+    <Col md={2}>
+      <Card
+        onClick={getShowId}
+        id={show.id}
+        key={show.id}
+        className='px-5 py-3'
+      >
+        <Card.Img variant='top' src={show.image.medium} id={show.id} />
+        <Card.Body id={show.id}>
+          <Card.Title id={show.id}>{show.name}</Card.Title>
+        </Card.Body>
 
-          <Button onClick={handelFavorite} id={item.id} value='no'>
-            ♡
-          </Button>
-          
-        </Col>
-        <Col>
-          <Card.Text>⭐️{item.rating.average}</Card.Text>
-        </Col>
-      </Row>
-    </Card>
+        <Row>
+          <Col>
+            {favorites?.some((favId) => parseInt(favId) === show.id) ? (
+              <Button
+                variant='warning'
+                onClick={handelFavorite}
+                id={show.id}
+                value={true}
+              >
+                Fav
+              </Button>
+            ) : (
+              <Button onClick={handelFavorite} id={show.id} value={false}>
+                not Fav
+              </Button>
+            )}
+          </Col>
+          <Col>
+            <Card.Text>⭐️{show.rating.average}</Card.Text>
+          </Col>
+        </Row>
+      </Card>
+    </Col>
   )
 }
 

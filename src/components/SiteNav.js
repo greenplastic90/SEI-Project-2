@@ -11,9 +11,10 @@ const SiteNav = () => {
     <Navbar id='nav-bar' bg='dark'>
       <Container>
         <Navbar.Brand>
-          <Link to='/'>🎥</Link>
+          <Link className='d-flex' to='/'>
+            🎥 ITVDB
+          </Link>
         </Navbar.Brand>
-
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse className='justify-content-end'>
           <Nav.Item className='mx-2'>
