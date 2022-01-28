@@ -17,7 +17,7 @@ const FavoritesPage = ({
       <Col md={10}>
         <div className='favorites-page'>
           <h2>Favorites</h2>
-          <Row>
+          <Row className='card-container'>
             {console.log(favorites)}
             {shows
               .filter((show) =>

@@ -79,7 +79,7 @@ const ShowCase = () => {
 
   return (
     <div>
-      <Col id='showcase'>
+      <Col id='showcase' className='mt-5'>
         <Row>
           {showInfo ? (
             <Col md={6}>
@@ -92,7 +92,13 @@ const ShowCase = () => {
               <p>Rating: {showInfo.rating.average}</p>
               <hr />
               <h3>Summary:</h3>
-              <div>{showInfo.summary}</div>
+              <div>
+                {showInfo.summary
+                  .replace('<p>', '')
+                  .replace('</p>', '')
+                  .replace('<b>', '')
+                  .replace('</b>', '')}
+              </div>
               <hr />
               <h3>Series info:</h3>
 
@@ -110,40 +116,54 @@ const ShowCase = () => {
                 <p>Network: {showInfo.network.name}</p>
               )}
 
-              <p>Official Website: {showInfo.officialSite}</p>
+              <p>
+                Official Website:{' '}
+                {
+                  <a href={showInfo.officialSite} target='_blank'>
+                    {showInfo.officialSite}
+                  </a>
+                }
+              </p>
 
-              <h3>Cast</h3>
-              <Row>
-                {castInfo
-                  ? castInfo?.map((item, i) => {
-                      return (
-                        <Col key={i}>
-                          <Card>
-                            {item.person.image.medium ? (
-                              <Card.Img
-                                variant='top'
-                                src={item.person.image.medium}
-                                id={item.id}
-                              />
-                            ) : null}
-
-                            <Card.Body>
-                              <Card.Title>{item.person.name}</Card.Title>
-                              <Card.Text>{item.character.name}</Card.Text>
-                            </Card.Body>
-                          </Card>
-                        </Col>
-                      )
-                    })
-                  : null}
-              </Row>
+              <Link id='back-btn' to='/search'>
+                Back
+              </Link>
             </Col>
           ) : null}
           {showInfo ? (
             <Col md={4}>
-              <img src={showInfo.image.original} alt={showInfo.name} />
+              <img
+                className='title-pic'
+                src={showInfo.image.original}
+                alt={showInfo.name}
+              />
             </Col>
           ) : null}
+        </Row>
+        <Row id='cast-row'>
+          <h3>Cast</h3>
+          {castInfo
+            ? castInfo?.map((item, i) => {
+                return (
+                  <Col key={i}>
+                    <Card>
+                      {item.person.image.medium ? (
+                        <Card.Img
+                          variant='top'
+                          src={item.person.image.medium}
+                          id={item.id}
+                        />
+                      ) : null}
+
+                      <Card.Body>
+                        <Card.Title>{item.person.name}</Card.Title>
+                        <Card.Text>{item.character.name}</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                )
+              })
+            : null}
         </Row>
       </Col>
     </div>

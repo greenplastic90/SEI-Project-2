@@ -30,23 +30,24 @@ export const SideBar = ({ clickedShowId }) => {
   return (
     <Col className='side-bar' md={2}>
       {sidebarShow ? (
-        <Card className='px-5 py-3 m2-2 side-card'>
-          <Card.Body>
+        <Card className='px-2 py-2 m2-2 side-card'>
+          <Card.Body className='p-0 pb-2'>
             <Card.Title>{sidebarShow.name}</Card.Title>
             {sidebarShow.network !== null && (
-              <Card.Text>Network: {sidebarShow.network.name}</Card.Text>
+              <Card.Text>
+                Network: {<b>{sidebarShow.network.name}</b>}
+              </Card.Text>
             )}
-            <Card.Text>Rating: {sidebarShow.rating.average}</Card.Text>
-            <Card.Text>Status: {sidebarShow.status}</Card.Text>
-            <Card.Text>Seasons: (TBD)</Card.Text>
+            <Card.Text>Rating: {<b>{sidebarShow.rating.average}</b>}</Card.Text>
+            <Card.Text>Status: {<b>{sidebarShow.status}</b>}</Card.Text>
           </Card.Body>
-          <ListGroup>
+          <ListGroup className='py-2'>
             {sidebarShow.genres.map((genres, i) => (
               <li key={i}>{genres}</li>
             ))}
           </ListGroup>
           <Link id={sidebarShow.id} to={`/${sidebarShow.id}`}>
-            <Button variant='primary'>Go to Show's page</Button>
+            <Button variant='primary'>Show's page ></Button>
           </Link>
         </Card>
       ) : (

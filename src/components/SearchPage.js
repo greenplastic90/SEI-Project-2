@@ -34,9 +34,8 @@ const SearchPage = ({
             setGenreSelected={setGenreSelected}
             genreSelected={genreSelected}
           />
-          <h2>Search Page</h2>
           {filteredList.length ? (
-            <Row>
+            <Row className='card-container'>
               {filteredList?.map((show) => {
                 return (
                   <ShowCard

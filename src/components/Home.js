@@ -29,7 +29,7 @@ export const Home = () => {
   return (
     <div id='home' className='d-flex mx-0'>
       <h1>ITVDB</h1>
-      <Link className='btn btn-dark' to='/search'>
+      <Link className='btn ' to='/search'>
         Browse Shows
       </Link>
       {randomShows?.map((show) => (

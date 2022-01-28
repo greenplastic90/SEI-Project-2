@@ -4,13 +4,11 @@ html,
   background-color: $navy;
 }
 
-.card {
-  .col {
-    background-color: white;
-  }
-}
-
 .dropdown-menu {
   height: 200px;
   overflow-y: scroll;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
 }

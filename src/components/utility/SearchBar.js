@@ -36,11 +36,12 @@ const SearchBar = ({
     e.preventDefault()
   }
   return (
-    <div className='search-bar'>
-      <Row className='justify-content-center'>
+    <div className='search-bar' id='search-bar'>
+      <Row className='justify-content-center' id='search-row'>
         <Col md={3}>
-          <Form onSubmit={handelSubmit}>
+          <Form onSubmit={handelSubmit} id='search-container'>
             <Form.Control
+              id='text-search'
               type='text'
               placeholder='Search'
               onChange={handelChange}

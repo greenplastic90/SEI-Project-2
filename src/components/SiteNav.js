@@ -8,20 +8,20 @@ import Container from 'react-bootstrap/Container'
 
 const SiteNav = () => {
   return (
-    <Navbar id='nav-bar' bg='dark'>
-      <Container>
+    <Navbar id='nav-bar' fixed='top'>
+      <Container fluid>
         <Navbar.Brand>
           <Link className='d-flex' to='/'>
-            🎥 ITVDB
+            ITVDB
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse className='justify-content-end'>
-          <Nav.Item className='mx-2'>
-            <Link to='/favorites'>Favorites</Link>
+          <Nav.Item className='mx-2 '>
+            <Link to='/search'>TV Shows</Link>
           </Nav.Item>
-          <Nav.Item className='mx-2'>
-            <Link to='/search'>Search TV Shows</Link>
+          <Nav.Item className='mx-2  '>
+            <Link to='/favorites'>Favorites</Link>
           </Nav.Item>
         </Navbar.Collapse>
       </Container>

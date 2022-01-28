@@ -5,11 +5,11 @@
 #home {
   h1 {
     position: absolute;
-    top: 50%;
-    left: 55%;
+    top: 40%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
-    background-color: rgba(0, 0, 0, 0.851);
+    color: $grey;
+    background-color: rgba(34, 40, 49, 0.851);
     font-size: 20vw;
     padding-right: 5%;
     padding-left: 5%;
@@ -17,17 +17,21 @@
   a {
     position: absolute;
     font-size: 3em;
-    top: 80%;
-    left: 42%;
-    border: 3px solid white;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid $grey;
+    color: $grey;
+    background-color: $red;
     &:hover {
       background-color: $red;
+      color: $navy;
+      border: 5px solid $navy;
     }
   }
-  width: 90%;
+  width: 100%;
   padding-top: 0.5%;
   margin: 0 auto;
-  padding-left: 10%;
   position: relative;
 
   .homeIMG {

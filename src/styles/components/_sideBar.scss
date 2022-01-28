@@ -1,7 +1,38 @@
 .side-bar {
   .side-card {
+    background-color: $grey;
     position: fixed;
     // margin-top: 50%;
-    top: 15%;
+    top: 16%;
+    margin-right: 2%;
+    width: 13em;
+  }
+  .list-group {
+    list-style-type: none;
+    li {
+      text-decoration: none;
+    }
+  }
+
+  a {
+    display: contents;
+    button {
+      margin: 9px 1rem 2px;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      color: $grey;
+      background-color: $red;
+      border: 2px solid $grey;
+      border-radius: 3px;
+      font-size: 15px;
+      border: 3px solid $blue;
+      color: $blue;
+      &:hover {
+        border: 3px solid white;
+        color: white;
+        background-color: $red;
+      }
+    }
   }
 }
